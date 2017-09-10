@@ -55,11 +55,13 @@ np.set_printoptions(precision=4, linewidth=100)
 
 to_bw = np.array([0.299, 0.587, 0.114])
 
+
 def gray(img):
     if K.image_dim_ordering() == 'tf':
         return np.rollaxis(img, 0, 1).dot(to_bw)
     else:
         return np.rollaxis(img, 0, 3).dot(to_bw)
+
 
 def to_plot(img):
     if K.image_dim_ordering() == 'tf':
@@ -67,14 +69,18 @@ def to_plot(img):
     else:
         return np.rollaxis(img, 0, 3).astype(np.uint8)
 
+
 def plot(img):
     plt.imshow(to_plot(img))
 
 
 def floor(x):
     return int(math.floor(x))
+
+
 def ceil(x):
     return int(math.ceil(x))
+
 
 def plots(ims, figsize=(12,6), rows=1, interp=False, titles=None):
     if type(ims[0]) is np.ndarray:
@@ -260,4 +266,3 @@ class MixIterator(object):
             n0 = np.concatenate([n[0] for n in nexts])
             n1 = np.concatenate([n[1] for n in nexts])
             return (n0, n1)
-
